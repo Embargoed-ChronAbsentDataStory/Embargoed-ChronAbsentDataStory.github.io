@@ -22,18 +22,55 @@ $(document).ready(function(){
 
 });
 
+// Smooth scrolling
+
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+
 // Preloader
+
+window.addEventListener("load", function () {
+
+	var loader = document.getElementById("loader");
+	var loader_wrapper = document.getElementById("loader-wrapper");
+
+	loader.style.transition = "all 0.3s ease-out";
+	loader.style.webkitTransition = "all 0.3s ease-out";
+	loader.style.opacity = 0;
+
+	loader_wrapper.style.transition = "all 1s ease-out";
+	loader_wrapper.style.webkitTransition = "all 1s ease-out";
+	loader_wrapper.style.opacity = 0;
+
+	setTimeout(function () { document.body.removeChild(loader_wrapper) }, 1000);
+
+});
 
 $(document).ready(function() {
 
-	setTimeout(function(){
-		$('body').addClass('loaded');
-	}, 3000);
-
-	window.setTimeout(function() {
-		$('div').removeClass('preloading');
-	}, 3100);
-
+	$('body').addClass('loaded');
 
 });
 
@@ -43,7 +80,7 @@ $(document).ready(function() {
 
 	skel.breakpoints({
 		xlarge:	'(max-width: 1680px)',
-		large:	'(max-width: 1280px)',
+		large:	'(max-width: 1024px)',
 		medium:	'(max-width: 980px)',
 		small:	'(max-width: 736px)',
 		xsmall:	'(max-width: 480px)'
@@ -61,14 +98,14 @@ $(document).ready(function() {
 				$body.addClass('is-ie');
 
 		// Disable animations/transitions until the page has loaded.
-			if (skel.canUse('transition'))
+			/*if (skel.canUse('transition'))
 				$body.addClass('is-loading');
 
-			$window.on('load', function() {
+			/*$window.on('load', function() {
 				window.setTimeout(function() {
 					$body.removeClass('is-loading');
 				}, 100);
-			});
+			});*/
 
 		// Forms.
 
